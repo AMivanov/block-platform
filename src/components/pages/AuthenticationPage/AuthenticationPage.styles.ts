@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface IStyleProps {
-    isBig?:boolean;
+    isSign?: boolean;
 }
-export const SignUpPage = styled.div<IStyleProps>`
+export const AuthenticationPage = styled.div<IStyleProps>`
   width: 384px;
-  //height:  ${(props) => (props.isBig ? '599px' : '2000px')};
+  //height:  ${(props) => (props.isSign ? '599px' : '374px')};
   //min-height: 374px;
   border: 1px solid #DFE5EC;
   border-radius: 6px;

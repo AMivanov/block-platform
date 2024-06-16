@@ -8,10 +8,10 @@ export const Article = styled.li`
           rgba(0, 0, 0, 0.16) 0 10px 36px 0,
           rgba(0, 0, 0, 0.06) 0 0 0 1px;
   width: 938px;
-  height: 140px;
+  //height: 140px;
   position: relative;
   padding: 15px 16px 15px 16px;
-  margin-bottom: 22px;
+  margin: 0 auto 22px auto;
   grid-gap: 3px;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,8 @@ export const Content = styled.p`
   font-size: 12px;
   line-height: 22px;
   color: #00000080;
-  margin: 0;
+  margin: 0 0 10px 0;
+  width: 682px;
 `
 
 export const UserInfo = styled.div`

@@ -9,6 +9,13 @@ export const ArticlesPage = styled.div`
   //margin: 0 auto;
 `
 
+export const ArticlesList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
 export const Pagination = styled.div`
   text-align: center;
+  margin: 0 0 10px 0;
 `

@@ -1,3 +1,3 @@
 export interface IArticleProps {
-    isFullArticle: boolean;
+    isOpenProp?: boolean;
 }

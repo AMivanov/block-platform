@@ -1,3 +1,3 @@
-import AuthorizationContainer from './AuthorizationContainer';
+import ProfileBlock from './ProfileBlock';
 
-export default AuthorizationContainer
+export default ProfileBlock

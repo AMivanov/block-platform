@@ -2,15 +2,15 @@ import { Button, Checkbox, ConfigProvider } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { Link } from 'react-router-dom';
 
-import * as Styles from './SignUpPage.styles'
+import * as Styles from './AuthenticationPage.styles'
 
-export default function SignUpPage (props: any) {
+export default function AuthenticationPage (props: any) {
     const { isSignUp = false } = props;
     const onChange: CheckboxProps['onChange'] = (e) => {
         console.log(`checked = ${e.target.checked}`);
     };
     return (
-            <Styles.SignUpPage>
+            <Styles.AuthenticationPage isSign={isSignUp}>
                 <Styles.Title>
                     {isSignUp ? 'Create new account' : 'Sign In'}
                 </Styles.Title>
@@ -74,6 +74,6 @@ export default function SignUpPage (props: any) {
                         </Link>
                     </Styles.SignHref>
                 </Styles.FooterWrapper>
-            </Styles.SignUpPage>
+            </Styles.AuthenticationPage>
     )
 }
