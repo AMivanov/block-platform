@@ -18,6 +18,7 @@ export default function Article (props: IArticleProps) {
                         {articleElem.title}
                     </Styles.Title>
                     <LikeImg />
+
                     <Styles.LikesCount>
                         13
                     </Styles.LikesCount>
