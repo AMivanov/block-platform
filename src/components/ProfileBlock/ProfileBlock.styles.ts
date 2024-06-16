@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
-export const AuthorizationContainer = styled.section`
-  border: 1px solid red;
+export const ProfileBlock = styled.section`
+  display: flex;
+  justify-content: flex-end;
+  grid-gap: 20px;
 `

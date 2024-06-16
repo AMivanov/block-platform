@@ -1,3 +1,4 @@
-export interface IArticleProps {
-    isFullArticle: boolean;
+export interface IArticlePageProps {
+    isOpen?: boolean;
+    // itemId: number | string
 }
