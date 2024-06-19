@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ArticlesPage = styled.div`
+  overflow: hidden;
   //border: 1px solid blue;
   //margin: 0 auto 0 auto;
   // display: flex;

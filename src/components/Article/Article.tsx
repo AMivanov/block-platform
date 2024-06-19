@@ -1,17 +1,20 @@
 import Markdown from 'react-markdown';
 import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 
-import { ReactComponent as LikeImg } from '../../images/Vector.svg'
-import { ReactComponent as NoAvatar } from '../../images/noAvatar.svg'
+import { ReactComponent as LikeImg } from '../../shared/images/Vector.svg'
+import { ReactComponent as NoAvatar } from '../../shared/images/noAvatar.svg'
+import { IArticleElemProps } from '../../interfaces';
 
-import { IArticleProps } from './interfaces';
 import * as Styles from './Article.styles'
 
-export default function Article (props: IArticleProps) {
-    const { isOpenProp = false, articleElem } = props
-    const markdown = '# Hi, *Pluto*!'
+export default function Article(props: IArticleElemProps) {
+    const { isFullArticle = false, articleElem } = props
+
+    const formatDate = articleElem.createdAt ? format(parseISO(articleElem.createdAt), 'MMMM d, y') : ''
+
     return (
-        <Link to="/articles/:id/">
+        <Link to={`/article/${articleElem.slug}/`}>
             <Styles.Article>
                 <Styles.WrapperArticle>
                     <Styles.Title>
@@ -19,35 +22,36 @@ export default function Article (props: IArticleProps) {
                     </Styles.Title>
                     <LikeImg />
                     <Styles.LikesCount>
-                        13
+                        {articleElem.favoritesCount}
                     </Styles.LikesCount>
                 </Styles.WrapperArticle>
                 <Styles.TagList>
-                    <Styles.Tag>
-                        Tag 1
-                    </Styles.Tag>
-                    <Styles.Tag>
-                        Some Tag
-                    </Styles.Tag>
+                    {articleElem.tagList.map((tag, index) => (
+                        <Styles.Tag key={index}>
+                            {tag}
+                        </Styles.Tag>
+                    ))}
                 </Styles.TagList>
                 <Styles.Content>
-                    BlabberBlabberBlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablablalaBlablablaBlablabla
-                    BlablablaBlablablaBlablablaBlablablaBlablab
-                    BlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablablaBlablabla
+                    {articleElem.description}
                 </Styles.Content>
                 <Styles.UserInfo>
                     <Styles.UserName>
-                        John John
+                        {articleElem.author.username}
                     </Styles.UserName>
                     <Styles.PublicationDate>
-                        March 5, 2020
+                        {formatDate}
                     </Styles.PublicationDate>
                 </Styles.UserInfo>
                 <Styles.Avatar>
-                    <NoAvatar />
+                    {articleElem.author.image ? (
+                        <img src={articleElem.author.image} alt="user-logo" />
+                    ) : (
+                        <NoAvatar />
+                    )}
                 </Styles.Avatar>
-                {!isOpenProp && (
-                    <Markdown>{markdown}</Markdown>
+                {isFullArticle && (
+                    <Markdown>{articleElem.body}</Markdown>
                 )}
             </Styles.Article>
         </Link>

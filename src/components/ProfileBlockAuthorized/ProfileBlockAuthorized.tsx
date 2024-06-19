@@ -1,7 +1,7 @@
 import { Button, ConfigProvider } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as NoAvatar } from '../../images/noAvatar.svg'
+import { ReactComponent as NoAvatar } from '../../shared/images/noAvatar.svg'
 
 import * as Styles from './ProfileBlockAuthorized.styles'
 
