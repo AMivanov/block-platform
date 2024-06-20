@@ -9,49 +9,49 @@ import { IArticleElemProps } from '../../interfaces';
 import * as Styles from './Article.styles'
 
 export default function Article(props: IArticleElemProps) {
-    const { isFullArticle = false, articleElem } = props
+    const { isFullArticle = false, article } = props
 
-    const formatDate = articleElem.createdAt ? format(parseISO(articleElem.createdAt), 'MMMM d, y') : ''
+    const formatDate = article.createdAt ? format(parseISO(article.createdAt), 'MMMM d, y') : ''
 
     return (
-        <Link to={`/article/${articleElem.slug}/`}>
+        <Link to={`/article/${article.slug}/`}>
             <Styles.Article>
                 <Styles.WrapperArticle>
                     <Styles.Title>
-                        {articleElem.title}
+                        {article.title}
                     </Styles.Title>
                     <LikeImg />
                     <Styles.LikesCount>
-                        {articleElem.favoritesCount}
+                        {article.favoritesCount}
                     </Styles.LikesCount>
                 </Styles.WrapperArticle>
                 <Styles.TagList>
-                    {articleElem.tagList.map((tag, index) => (
+                    {article.tagList.map((tag, index) => (
                         <Styles.Tag key={index}>
                             {tag}
                         </Styles.Tag>
                     ))}
                 </Styles.TagList>
                 <Styles.Content>
-                    {articleElem.description}
+                    {article.description}
                 </Styles.Content>
                 <Styles.UserInfo>
                     <Styles.UserName>
-                        {articleElem.author.username}
+                        {article.author.username}
                     </Styles.UserName>
                     <Styles.PublicationDate>
                         {formatDate}
                     </Styles.PublicationDate>
                 </Styles.UserInfo>
                 <Styles.Avatar>
-                    {articleElem.author.image ? (
-                        <img src={articleElem.author.image} alt="user-logo" />
+                    {article.author.image ? (
+                        <img src={article.author.image} alt="user-logo" />
                     ) : (
                         <NoAvatar />
                     )}
                 </Styles.Avatar>
                 {isFullArticle && (
-                    <Markdown>{articleElem.body}</Markdown>
+                    <Markdown>{article.body}</Markdown>
                 )}
             </Styles.Article>
         </Link>

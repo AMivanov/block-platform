@@ -35,9 +35,11 @@ export default function ProfileBlockAuthorized () {
             <Styles.UserName>
                 John John
             </Styles.UserName>
-            <Styles.Avatar>
-                <NoAvatar />
-            </Styles.Avatar>
+            <Link to="/profile/">
+                <Styles.Avatar>
+                    <NoAvatar />
+                </Styles.Avatar>
+            </Link>
             <Button
               size="large"
             >

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { fetchArticlesError, fetchArticlesStart, fetchArticlesSuccess } from '../../redux/actions/localActions';
-
 // export async function fetchArticles() {
 //     try {
 //         const response = await axios.get('https://blog.kata.academy/api/articles');

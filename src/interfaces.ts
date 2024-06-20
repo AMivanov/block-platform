@@ -20,5 +20,5 @@ export interface IArticleProps {
 
 export interface IArticleElemProps {
     isFullArticle?: boolean;
-    articleElem: IArticleProps
+    article: IArticleProps
 }

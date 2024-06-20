@@ -6,6 +6,7 @@ import ArticlesPage from './components/pages/ArticlesPage';
 import AuthenticationPage from './components/pages/AuthenticationPage';
 import ArticlesCreatePage from './components/pages/ArticlesCreatePage';
 import { ArticlePage } from './components/pages/ArticlePage';
+import { EditProfilePage } from './components/pages/EditProfilePage';
 
 export default function App() {
     return (
@@ -23,6 +24,7 @@ export default function App() {
                 />
                 <Route path="/sign-up/" render={() => <AuthenticationPage isSignUp />} />
                 <Route path="/sign-in/" component={AuthenticationPage} />
+                <Route path="/profile/" component={EditProfilePage} />
                 <Route path="/create-article/" component={ArticlesCreatePage} />
             </Router>
         </>

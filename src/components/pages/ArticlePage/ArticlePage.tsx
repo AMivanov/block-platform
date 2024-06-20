@@ -13,7 +13,7 @@ export default function ArticlePage(props: IArticlePageProps) {
     return (
         <Article
           isFullArticle
-          articleElem={articles.find((elem) => elem.slug === slug)}
+          article={articles.find((elem) => elem.slug === slug)}
         />
     )
 }
