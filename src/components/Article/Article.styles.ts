@@ -87,4 +87,9 @@ export const Avatar = styled.div`
   width: 46px;
   height: 46px;
   right: 16px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 `

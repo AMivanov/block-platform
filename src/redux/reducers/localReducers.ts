@@ -1,11 +1,13 @@
 import {
     FETCH_ARTICLES_START,
     FETCH_ARTICLES_SUCCESS,
-    FETCH_ARTICLES_ERROR } from '../types/localTypes'
+    FETCH_ARTICLES_ERROR,
+    } from '../types/localTypes'
 
 const initialState = {
     articles: [],
-    loadingTickets: false,
+    articlesCount: 0,
+    loadingArticles: false,
     error: false,
 }
 
@@ -14,19 +16,20 @@ export const localReducers = (state = initialState, action: any) => {
         case FETCH_ARTICLES_START:
             return {
                 ...state,
-                loadingTickets: true,
+                loadingArticles: true,
             }
         case FETCH_ARTICLES_SUCCESS:
             return {
                 ...state,
-                loadingTickets: false,
-                articles: [...state.articles, ...action.articles],
+                loadingArticles: false,
+                articles: [...action.articles],
+                articlesCount: action.articlesCount,
                 error: false,
             }
         case FETCH_ARTICLES_ERROR:
             return {
                 ...state,
-                loadingTickets: false,
+                loadingArticles: false,
                 error: true,
             }
         default:

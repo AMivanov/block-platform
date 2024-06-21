@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  padding: 0 22px 0 22px;
+  padding: 0 22px;
   margin-bottom: 22px;
   font-size: 18px;
   line-height: 28px;
