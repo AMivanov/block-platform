@@ -1,1 +1,1 @@
-Vercel - blog-platform-six-sigma.vercel.app
+Vercel - [https://blog-platform-six-sigma.vercel.app/articles/](https://blog-platform-six-sigma.vercel.app/articles/)
