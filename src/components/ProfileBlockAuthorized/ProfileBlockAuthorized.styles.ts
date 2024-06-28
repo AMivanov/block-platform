@@ -17,3 +17,9 @@ export const Avatar = styled.div`
   height: 46px;
   right: 16px;
 `
+
+export const ActiveAvatar = styled.img`
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+`

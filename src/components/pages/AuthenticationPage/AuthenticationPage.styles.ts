@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface IStyleProps {
-    isSign?: boolean;
+    type?: string;
 }
 export const AuthenticationPage = styled.div<IStyleProps>`
   width: 384px;
-  //height:  ${(props) => (props.isSign ? '599px' : '374px')};
+  //height:  ${(props) => (props.type === 'signIn' ? '599px' : '374px')};
   //min-height: 374px;
   border: 1px solid #DFE5EC;
   border-radius: 6px;
@@ -48,6 +48,16 @@ export const Input = styled.input`
   &::placeholder {
     color: #BFBFBF;
   }
+
+  &.error {
+    border-color: red;
+  }
+`
+
+export const ErrorMessage = styled.p`
+  margin: 0;
+  padding: 0;
+  color: #F5222D;
 `
 
 export const PositionButton = styled.div`

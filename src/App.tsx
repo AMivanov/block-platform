@@ -4,9 +4,8 @@ import * as Styles from './App.styles'
 import Header from './components/Header';
 import ArticlesPage from './components/pages/ArticlesPage';
 import AuthenticationPage from './components/pages/AuthenticationPage';
-import ArticlesCreatePage from './components/pages/ArticlesCreatePage';
+import ArticleCreatePage from './components/pages/ArticleCreatePage';
 import { ArticlePage } from './components/pages/ArticlePage';
-import { EditProfilePage } from './components/pages/EditProfilePage';
 
 export default function App() {
     return (
@@ -19,13 +18,23 @@ export default function App() {
                   path="/article/:slug/"
                   render={({ match }) => {
                       const { slug } = match.params
-                           return <ArticlePage slug={slug} />
-                       }}
+                      if (window.location.pathname.includes('/edit/')) {
+                          return null
+                      }
+                      return <ArticlePage slug={slug} />
+                  }}
                 />
-                <Route path="/sign-up/" render={() => <AuthenticationPage isSignUp />} />
-                <Route path="/sign-in/" component={AuthenticationPage} />
-                <Route path="/profile/" component={EditProfilePage} />
-                <Route path="/create-article/" component={ArticlesCreatePage} />
+                <Route path="/sign-up/" render={() => <AuthenticationPage type="signUp" />} />
+                <Route path="/sign-in/" render={() => <AuthenticationPage type="signIn" />} />
+                <Route path="/profile/" render={() => <AuthenticationPage type="edit" />} />
+                <Route path="/create-article/" render={() => <ArticleCreatePage slug="" />} />
+                <Route
+                  path="/article/:slug/edit/"
+                  render={({ match }) => {
+                        const { slug } = match.params
+                            return <ArticleCreatePage slug={slug} />
+                    }}
+                />
             </Router>
         </>
     )

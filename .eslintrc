@@ -86,6 +86,8 @@
     "eol-last": "off",
     "react/no-unescaped-entities": "off",
     "default-param-last": "off",
+    "no-nested-ternary": "off",
+    "no-mixed-operators": "off",
     "max-len": [
       "warn",
       400,

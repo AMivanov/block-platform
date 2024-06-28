@@ -29,6 +29,5 @@ export const WrapperTags = styled.div`
   height: 40px;
   justify-content: left;
   gap: 20px;
-  
   margin-bottom: 20px;
 `

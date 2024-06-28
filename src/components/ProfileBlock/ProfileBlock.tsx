@@ -22,18 +22,10 @@ export default function ProfileBlock () {
                 }}
             >
             <Link to="/sign-in/">
-                <Button
-                  size="large"
-                >
-                    Sign In
-                </Button>
+                <Button size="large">Sign In</Button>
             </Link>
             <Link to="/sign-up/">
-                <Button
-                  size="large"
-                >
-                    Sign Up
-                </Button>
+                <Button size="large">Sign Up</Button>
             </Link>
             </ConfigProvider>
         </Styles.ProfileBlock>
