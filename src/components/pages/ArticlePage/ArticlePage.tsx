@@ -8,6 +8,8 @@ import { IArticlePageProps } from './ArticlePage.interfaces';
 export default function ArticlePage(props: IArticlePageProps) {
     const { slug = '' } = props
 
+    localStorage.setItem('slug', slug);
+
     const articles = useSelector((state: RootState) => state.localReducer.articles)
 
     return (
