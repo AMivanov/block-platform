@@ -19,10 +19,13 @@ const instance = axios.create({
     },
 })
 
-export function fetchArticles(page: number) {
+export function fetchArticles(page: number | undefined) {
     return async (dispatch: AppDispatch) => {
         dispatch(fetchArticlesStart())
         try {
+            if (!page) {
+                return
+            }
             const response = await instance.get(`/articles?limit=5&offset=${(page - 1) * 5}`)
             const articles = [...response.data.articles]
             const { articlesCount } = response.data
@@ -94,7 +97,6 @@ export function fetchPutEditProfile (data: IUser) {
             }
             return response
         } catch (e: any) {
-            console.log('Ошибка при отправке нового пользователя', e)
             return Promise.reject(e)
         }
     }
@@ -129,10 +131,8 @@ export function fetchPutEditArticle(data: IUserArticle) {
                     body: data.body,
                 },
             })
-            console.log('editArticle', response.data)
             return response
         } catch (e: any) {
-            console.log('Ошибка при отправке обновленной статьи', e)
             return Promise.reject(e)
         }
     }
@@ -141,9 +141,24 @@ export function fetchPutEditArticle(data: IUserArticle) {
 export const fetchDeleteArticle = async () => {
     const slug = localStorage.getItem('slug')
     try {
-        const response = instance.delete(`/articles/${slug}`)
-        console.log(response)
+        return instance.delete(`/articles/${slug}`)
     } catch (e: any) {
-        console.log('Ошибка при создании статьи', e)
+        return e
+    }
+}
+
+export const fetchPostArticleLike = (slug: string): Promise<any> => {
+    try {
+        return instance.post(`/articles/${slug}/favorite`)
+    } catch (e: any) {
+        return e
+    }
+}
+
+export const fetchDeleteArticleLike = (slug: string): Promise<any> => {
+    try {
+        return instance.delete(`/articles/${slug}/favorite`)
+    } catch (e: any) {
+        return e
     }
 }

@@ -1,19 +1,22 @@
 import Markdown from 'react-markdown';
 import { Link, useHistory } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
-import { Button, ConfigProvider } from 'antd';
+import type { PopconfirmProps } from 'antd';
+import { Button, ConfigProvider, message, Popconfirm } from 'antd';
+import React from 'react';
 
 import { ReactComponent as LikeImg } from '../../shared/images/Vector.svg'
 import { ReactComponent as NoAvatar } from '../../shared/images/noAvatar.svg'
+import { ReactComponent as RedHeart } from '../../shared/images/red-heart.svg'
 import { IArticleElemProps } from '../../interfaces';
-import { useAppSelector } from '../../shared/hooks';
-import { fetchDeleteArticle } from '../../shared/api/api';
+import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { fetchArticles, fetchDeleteArticle, fetchDeleteArticleLike, fetchPostArticleLike } from '../../shared/api/api';
 
 import * as Styles from './Article.styles'
+import { ImageWrapper } from './Article.styles';
 
 export default function Article(props: IArticleElemProps) {
-    const { isFullArticle = false, article } = props
-
+    const { isFullArticle = false, article, page } = props
     if (!article || !article.author) {
         return null
     }
@@ -23,11 +26,11 @@ export default function Article(props: IArticleElemProps) {
     const isCurrentUser = userState.username && article.author.username === userState.username
     const formatDate = article.createdAt ? format(parseISO(article.createdAt), 'MMMM d, y') : ''
     const history = useHistory()
+    const dispatch = useAppDispatch()
 
     const handleDeleteArticle = () => {
         fetchDeleteArticle()
             .then(() => {
-            console.log('delete');
             history.push('/articles/');
         })
             .catch((error) => {
@@ -35,14 +38,54 @@ export default function Article(props: IArticleElemProps) {
             });
     }
 
+    const confirm: PopconfirmProps['onConfirm'] = (e) => {
+        console.log(e);
+        message.success('Click on Yes')
+        handleDeleteArticle()
+    }
+
+    const cancel: PopconfirmProps['onCancel'] = (e) => {
+        console.log(e);
+        message.error('Click on No');
+    };
+
+    const handleLikeClick = (page: number | undefined) => {
+        if (article?.favorited) {
+            fetchDeleteArticleLike(article.slug)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(fetchArticles(page));
+                    }
+                });
+        } else {
+            fetchPostArticleLike(article.slug)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(fetchArticles(page));
+                    }
+                });
+        }
+    }
+
+    const handleRouteArticle = () => {
+        if (!window.location.pathname.includes(`/article/${article.slug}/`)) {
+            history.push(`/article/${article.slug}/`)
+        }
+    }
+
     return (
-        <Link to={`/article/${article.slug}/`}>
-            <Styles.Article>
+            <Styles.Article onClick={handleRouteArticle}>
                 <Styles.WrapperArticle>
                     <Styles.Title>
                         {article.title}
                     </Styles.Title>
-                    <LikeImg />
+                    <ImageWrapper onClick={(e) => {
+                        e.stopPropagation()
+                        handleLikeClick(page)
+                    }}
+                    >{article.favorited ? <RedHeart /> : <LikeImg /> }
+                    </ImageWrapper>
+
                     <Styles.LikesCount>
                         {article.favoritesCount}
                     </Styles.LikesCount>
@@ -74,16 +117,24 @@ export default function Article(props: IArticleElemProps) {
                 </Styles.Avatar>
                 {isFullArticle && (
                     <>
-                        <Markdown>{article.body}</Markdown>
+                        <Styles.Markdown>
+                            <Markdown>{article.body}</Markdown>
+                        </Styles.Markdown>
                         {isCurrentUser && (
                             <Styles.WrapperAuthButton>
-                                <Button
-                                  danger
-                                  size="middle"
-                                  onClick={handleDeleteArticle}
+                                <Popconfirm
+                                  title=""
+                                  description="Are you sure to delete this article?"
+                                  onConfirm={confirm}
+                                  onCancel={cancel}
+                                  okText="Yes"
+                                  cancelText="No"
+                                  placement="rightTop"
                                 >
-                                    Delete
-                                </Button>
+                                    <Button danger size="middle">
+                                        Delete
+                                    </Button>
+                                </Popconfirm>
                                 <ConfigProvider
                                   theme={{
                                         token: {
@@ -109,6 +160,5 @@ export default function Article(props: IArticleElemProps) {
                     </>
                 )}
             </Styles.Article>
-        </Link>
     )
 }

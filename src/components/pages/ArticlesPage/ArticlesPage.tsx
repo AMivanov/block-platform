@@ -1,5 +1,5 @@
 import { Pagination, ConfigProvider, Spin } from 'antd';
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 
 import Article from '../../Article';
 import { IArticleProps } from '../../../interfaces';
@@ -14,6 +14,7 @@ export default function ArticlesPage (props: IArticlesPageProps) {
     const articles = useAppSelector((state) => state.localReducer.articles)
     const articlesCount = useAppSelector((state) => state.localReducer.articlesCount)
     const loadingArticles = useAppSelector((state) => state.localReducer.loadingArticles)
+    const [page, setPage] = useState(1)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -22,6 +23,7 @@ export default function ArticlesPage (props: IArticlesPageProps) {
 
     const handlePageChange = (page: number) => {
         dispatch(fetchArticles(page))
+        setPage(page)
     }
 
     const articlesArr = articles.map((article: IArticleProps, index: number) => {
@@ -29,6 +31,7 @@ export default function ArticlesPage (props: IArticlesPageProps) {
             <Article
               key={index}
               article={article}
+              page={page}
             />
         )
     })

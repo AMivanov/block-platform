@@ -20,7 +20,8 @@ export interface IArticleProps {
 
 export interface IArticleElemProps {
     isFullArticle?: boolean;
-    article: IArticleProps
+    article: IArticleProps;
+    page?: number;
 }
 
 export interface IUser {

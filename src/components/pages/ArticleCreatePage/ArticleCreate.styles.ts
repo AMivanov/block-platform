@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ArticlesCreate = styled.div`
   width: 938px;
-  min-height: 701px;
+  //min-height: 701px;
   border: 1px solid #D9D9D9;
   background-color: #FFFFFF;
   border-radius: 6px;
@@ -15,6 +15,8 @@ export const ArticlesCreate = styled.div`
   font-size: 14px;
   line-height: 22px;
   color: #262626;
+  display: flex;
+  flex-direction: column;
 `
 
 export const Title = styled.h2`
@@ -26,8 +28,18 @@ export const Title = styled.h2`
 
 export const WrapperTags = styled.div`
   display: flex;
-  height: 40px;
+  flex-direction: column;
   justify-content: left;
   gap: 20px;
   margin-bottom: 20px;
+`
+export const AddWrapperTags = styled.div`
+  display: flex;
+  gap: 20px;
+`
+
+export const BtnAdd = styled.div`
+  position: absolute;
+  left: 480px;
+  top: 585px;
 `

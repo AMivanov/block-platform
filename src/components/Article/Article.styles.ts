@@ -16,6 +16,7 @@ export const Article = styled.li`
   grid-gap: 3px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `
 
 export const WrapperArticle = styled.div`
@@ -29,6 +30,8 @@ export const Title = styled.h2`
   line-height: 28px;
   color: #1890FF;
   margin: 0 15px 0 0;
+  max-width: 700px;
+  word-break: break-all;
 `
 
 export const LikesCount = styled.div`
@@ -62,7 +65,8 @@ export const Content = styled.p`
   line-height: 22px;
   color: #00000080;
   margin: 0 0 10px 0;
-  width: 682px;
+  text-align: left;
+  word-break: break-all;
 `
 
 export const UserInfo = styled.div`
@@ -103,4 +107,9 @@ export const WrapperAuthButton = styled.div`
   display: flex;
   width: 150px;
   justify-content: space-between;
+`
+export const ImageWrapper = styled.div``
+
+export const Markdown = styled.div`
+  word-break: break-all;
 `
