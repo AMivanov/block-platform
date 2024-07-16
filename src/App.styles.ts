@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 // @ts-ignore
-import InterRegular from './fonts/Inter-Regular.woff'
+import InterRegular from './shared/fonts/Inter-Regular.woff'
 // @ts-ignore
-import RobotoRegular from './fonts/Roboto-Regular.woff'
+import RobotoRegular from './shared/fonts/Roboto-Regular.woff'
 
 export const GlobalStyles = createGlobalStyle`
   @font-face {

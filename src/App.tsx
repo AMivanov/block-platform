@@ -1,39 +1,40 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import * as Styles from './App.styles'
 import Header from './components/Header';
-// import MainContainer from './components/MainContainer';
-import ArticlesPage from './components/pages/Articles/ArticlesPage';
+import ArticlesPage from './components/pages/ArticlesPage';
 import AuthenticationPage from './components/pages/AuthenticationPage';
-import ArticlesCreatePage from './components/pages/Articles/ArticlesCreatePage';
-import { fetchArticles } from './api/api';
-// import SignInPages from './components/pages/SignInPages';
+import ArticleCreatePage from './components/pages/ArticleCreatePage';
+import { ArticlePage } from './components/pages/ArticlePage';
 
 export default function App() {
-    const dispatch: any = useDispatch()
-    useEffect(() => {
-        dispatch(fetchArticles())
-    }, [])
-
     return (
         <>
             <Styles.GlobalStyles />
             <Router>
-            <Header />
+                <Header />
                 <Route path="/articles/" exact render={() => <ArticlesPage isOpen />} />
                 <Route
-                  path="/articles/:id/"
+                  path="/article/:slug/"
                   render={({ match }) => {
-                      const { id } = match.params
-                           // console.log(match)
-                           return <ArticlesPage itemId={id} />
-                       }}
+                      const { slug } = match.params
+                      if (window.location.pathname.includes('/edit/')) {
+                          return null
+                      }
+                      return <ArticlePage slug={slug} />
+                  }}
                 />
-                <Route path="/sign-up/" render={() => <AuthenticationPage isSignUp />} />
-                <Route path="/sign-in/" component={AuthenticationPage} />
-                <Route path="/create-article/" component={ArticlesCreatePage} />
+                <Route path="/sign-up/" render={() => <AuthenticationPage type="signUp" />} />
+                <Route path="/sign-in/" render={() => <AuthenticationPage type="signIn" />} />
+                <Route path="/profile/" render={() => <AuthenticationPage type="edit" />} />
+                <Route path="/create-article/" render={() => <ArticleCreatePage slug="" />} />
+                <Route
+                  path="/article/:slug/edit/"
+                  render={({ match }) => {
+                        const { slug } = match.params
+                            return <ArticleCreatePage slug={slug} />
+                    }}
+                />
             </Router>
         </>
     )

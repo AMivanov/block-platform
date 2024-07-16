@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Article = styled.li`
   font-family: 'InterRegular', sans-serif;
+  background: #FFFFFF;
   border: 1px solid #DFE5EC;
   border-radius: 7px;
   box-shadow:
           rgba(0, 0, 0, 0.16) 0 10px 36px 0,
           rgba(0, 0, 0, 0.06) 0 0 0 1px;
   width: 938px;
-  //height: 140px;
+  min-height: 130px;
   position: relative;
   padding: 15px 16px 15px 16px;
   margin: 0 auto 22px auto;
@@ -38,6 +39,7 @@ export const LikesCount = styled.div`
 `
 
 export const TagList = styled.ul`
+  width: 800px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -87,4 +89,18 @@ export const Avatar = styled.div`
   width: 46px;
   height: 46px;
   right: 16px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+`
+
+export const WrapperAuthButton = styled.div`
+  position: absolute;
+  right: 16px;
+  top: 80px;
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
 `
